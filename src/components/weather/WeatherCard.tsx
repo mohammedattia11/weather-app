@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 
 interface WeatherCardProps {
   title: "degree" | "humidity" | "wind Speed" | "pressure" | "visibility";
-  value: string;
+  value: number;
   icon: React.ReactNode;
 }
 export default function WeatherCard({ title, value, icon }: WeatherCardProps) {
