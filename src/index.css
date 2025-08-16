@@ -39,6 +39,11 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+  --color-temp-color:#FFCC33;
+  --color-humidity-color:#00FFAA;
+  --color-wind-color:#3377FF;
+  --color-main-color:#17171C;
+  --color-secondary-color:#18514C;
 }
 
 :root {
@@ -117,4 +122,7 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+body {
+  font-family: serif;
 }
