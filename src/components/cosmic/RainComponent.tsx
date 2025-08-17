@@ -82,7 +82,7 @@ const RainComponent = ({ size = 120 }) => {
       </div>
 
       {/* CSS Animation for falling rain */}
-      <style jsx>{`
+      <style>{`
         @keyframes fall {
           to {
             transform: translateY(${size * 0.6}px);
