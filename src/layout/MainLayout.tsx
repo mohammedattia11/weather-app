@@ -1,52 +1,19 @@
 import CitiesList from "@/components/ui/CitiesList";
+import Header from "@/components/ui/Header";
 import SearchField from "@/components/ui/SearchField";
 import { Particles } from "@/components/ui/particles";
 import Forecast from "@/feature/forecast/Forecast";
 import Weather from "@/feature/weather/Weather";
-import { useLocation } from "@/hooks/useLocation";
-import useSearch from "@/hooks/useSearch";
+import { useWeather } from "@/hooks/useWeather";
 import { cn } from "@/lib/utils";
-import { type WeatherTypes } from "@/types/weather";
-import { useEffect, useState } from "react";
 
 export default function MainLayout() {
-  const [searchQuery, setSearchQuery] = useState<string | null>(null);
-  const [coords, setCoords] = useState<
-    { lat: number; lon: number } | undefined
-  >(undefined);
-  const { getCurrentLocation, coordinates } = useLocation();
-
-  useEffect(() => {
-    if (coordinates) {
-      setCoords({ lat: coordinates.latitude, lon: coordinates.longitude });
-    }
-  }, [coordinates]);
-
-  const { isPending: isWeatherLoading, data: weatherData } =
-    useSearch<WeatherTypes>(searchQuery, "weather", coords);
-  const { data: forecastData } = useSearch<WeatherTypes[]>(
-    searchQuery,
-    "forecast",
-    coords,
-  );
-  const shouldShowWeather = !!(searchQuery || coords);
-  const isLoading = isWeatherLoading && shouldShowWeather;
-
-  const handleSearchSubmit = (query: string) => {
-    setSearchQuery(query);
-    setCoords(undefined);
-  };
-
-  const handleGeoSearch = () => {
-    setSearchQuery(null);
-    getCurrentLocation();
-  };
-
+  const { shouldShowWeather, weatherData,forecastData } = useWeather();
   return (
     <div
       className={cn(
         "bg-background relative flex w-full flex-col items-center justify-center overflow-x-hidden rounded-lg",
-        !shouldShowWeather ? "h-screen" : "",
+        !shouldShowWeather ? "h-screen justify-start" : "",
       )}
     >
       <Particles
@@ -56,12 +23,9 @@ export default function MainLayout() {
         refresh
       />
       <main className="z-10 container mx-auto flex flex-col gap-4 p-4">
-        <SearchField
-          onGeoSearch={handleGeoSearch}
-          isLoading={isLoading}
-          onSubmit={handleSearchSubmit}
-        />
-        <CitiesList setCoords={setCoords} setSearchQuery={setSearchQuery} />
+        <Header />
+        <SearchField/>
+        <CitiesList/>
         {shouldShowWeather && (
           <>
             <div className="flex flex-row items-center gap-3 text-stone-300 lg:mx-auto lg:w-9/12">
@@ -70,8 +34,8 @@ export default function MainLayout() {
               </p>
               <p className="text-sm">just now</p>
             </div>
-            {weatherData && <Weather weatherData={weatherData} />}
-            {forecastData && <Forecast forecastData={forecastData} />}
+            {weatherData && <Weather />}
+            {forecastData && <Forecast />}
           </>
         )}
       </main>

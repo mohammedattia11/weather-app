@@ -1,10 +1,9 @@
-import type { WeatherTypes } from "@/types/weather";
 import { Calendar } from "lucide-react";
 import ForecastCard from "./components/ForecastCard";
-interface ForecastProps {
-  forecastData: WeatherTypes[];
-}
-export default function Forecast({ forecastData }: ForecastProps) {
+import { useWeather } from "@/hooks/useWeather";
+
+export default function Forecast() {
+  const {forecastData} = useWeather()
   return (
     <div className="border-secondary-color flex w-full flex-col gap-10 rounded-3xl border bg-gradient-to-r from-[#151D2C]/90 to-[#102824]/90 p-4 backdrop-blur-sm">
       <div className="flex flex-row items-center gap-3 pt-5 pl-4">

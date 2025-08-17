@@ -1,11 +1,9 @@
-import type { WeatherTypes } from "@/types/weather";
+import { useWeather } from "@/hooks/useWeather";
 import { Droplets, Gauge, Thermometer, Wind } from "lucide-react";
 import WeatherCard from "./WeatherCard";
-interface WeatherDataProps {
-  weatherData: WeatherTypes;
-}
 
-export default function WeatherData({ weatherData }: WeatherDataProps) {
+export default function WeatherData() {
+  const { weatherData } = useWeather();
   return (
     <div className="flex flex-col justify-center lg:w-9/12">
       <h2 className="p-4 text-xl font-semibold">Current Weather</h2>
@@ -13,27 +11,31 @@ export default function WeatherData({ weatherData }: WeatherDataProps) {
         <WeatherCard
           title="degree"
           icon={<Thermometer />}
-          value={Math.floor(weatherData.main.feels_like)}
+          value={Math.floor(weatherData?.main.feels_like ?? 0)}
         />
         <WeatherCard
           title="humidity"
           icon={<Droplets />}
-          value={weatherData.main.humidity}
+          value={weatherData?.main.humidity ?? 0}
         />
         <WeatherCard
           title="wind Speed"
           icon={<Wind />}
-          value={weatherData.wind.speed}
+          value={weatherData?.wind.speed ?? 0}
         />
         <WeatherCard
           title="pressure"
           icon={<Gauge />}
-          value={weatherData.main.pressure}
+          value={weatherData?.main.pressure ?? 0}
         />
         <WeatherCard
           title="visibility"
           icon={<Thermometer />}
-          value={weatherData.visibility / 1000}
+          value={
+            typeof weatherData?.visibility === "number"
+              ? weatherData.visibility / 1000
+              : 0
+          }
         />
       </div>
     </div>

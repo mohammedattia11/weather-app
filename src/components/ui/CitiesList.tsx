@@ -1,12 +1,7 @@
+import { useWeather } from "@/hooks/useWeather";
 import { Button } from "./button";
-interface CitiesListProps {
-  setSearchQuery: (value: string) => void;
-  setCoords: (value: undefined) => void;
-}
-export default function CitiesList({
-  setSearchQuery,
-  setCoords,
-}: CitiesListProps) {
+export default function CitiesList() {
+  const {setSearchQuery,setCoords} = useWeather();
   return (
     <div className="flex w-full flex-col gap-1 lg:mx-auto lg:w-6/12">
       <p className="text-stone-300">Popular cities</p>

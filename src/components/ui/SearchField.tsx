@@ -1,25 +1,17 @@
+import { useWeather } from "@/hooks/useWeather";
 import { MapPin } from "lucide-react";
 import { useState } from "react";
 import { Button } from "./button";
 import SearchInput from "./SearchInput";
 import { Spinner } from "./Spinner";
 
-interface SearchFieldProps {
-  onSubmit: (query: string) => void;
-  isLoading: boolean;
-  onGeoSearch: () => void;
-}
-
-export default function SearchField({
-  onSubmit,
-  isLoading,
-  onGeoSearch,
-}: SearchFieldProps) {
+export default function SearchField() {
+  const { handleSearchSubmit, handleGeoSearch, isLoading } = useWeather();
   const [query, setQuery] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSubmit(query);
+    handleSearchSubmit(query);
   };
 
   return (
@@ -39,7 +31,7 @@ export default function SearchField({
           {isLoading ? <Spinner /> : "Search"}
         </Button>
         <Button
-          onClick={onGeoSearch}
+          onClick={handleGeoSearch}
           className="border-secondary-color cursor-pointer border bg-gradient-to-r from-[#151D2C]/90 to-[#102824]/90 px-4 py-5 backdrop-blur-sm"
         >
           <MapPin className="text-stone-300" />
