@@ -1,8 +1,8 @@
-import type { ForecastWeatherTypes } from "@/types/forecast";
+import type { CurrentWeatherTypes } from "@/types/weather";
 import { Calendar } from "lucide-react";
 import ForecastCard from "./ForecastCard";
 interface ForecastProps {
-  forecastData: ForecastWeatherTypes;
+  forecastData: CurrentWeatherTypes[];
 }
 export default function ForecastList({ forecastData }: ForecastProps) {
   return (
@@ -11,10 +11,10 @@ export default function ForecastList({ forecastData }: ForecastProps) {
         <span className="bg-secondary-color rounded-lg p-2">
           <Calendar className="text-humidity-color" />
         </span>
-        <p className="text-3xl font-semibold">Today Cosmic Forecast</p>
+        <p className="text-3xl font-semibold">5-Days Cosmic Forecast</p>
       </div>
       <div className="grid w-full grid-cols-1 gap-6 p-4 sm:grid-cols-2 lg:grid-cols-5">
-        {forecastData?.list.slice(0, 5).map((item) => (
+        {forecastData?.map((item) => (
           <ForecastCard forecastData={item} key={item.dt} />
         ))}
       </div>

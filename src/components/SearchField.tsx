@@ -7,9 +7,10 @@ import { Spinner } from "./ui/Spinner";
 interface SearchFieldProps {
   onSubmit: (query: string) => void;
   isLoading: boolean;
+  onGeoSearch: () => void;
 }
 
-export default function SearchField({ onSubmit, isLoading }: SearchFieldProps) {
+export default function SearchField({ onSubmit, isLoading,onGeoSearch }: SearchFieldProps) {
   const [query, setQuery] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -33,7 +34,7 @@ export default function SearchField({ onSubmit, isLoading }: SearchFieldProps) {
         >
           {isLoading ? <Spinner /> : "Search"}
         </Button>
-        <Button className="border-secondary-color cursor-pointer border bg-gradient-to-r from-[#151D2C]/90 to-[#102824]/90 px-4 py-5 backdrop-blur-sm">
+        <Button onClick={onGeoSearch} className="border-secondary-color cursor-pointer border bg-gradient-to-r from-[#151D2C]/90 to-[#102824]/90 px-4 py-5 backdrop-blur-sm">
           <MapPin className="text-stone-300" />
         </Button>
       </div>
