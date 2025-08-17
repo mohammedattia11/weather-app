@@ -1,8 +1,8 @@
-import type { CurrentWeatherTypes } from "@/types/weather";
-import MoonCloudComponent from "../MoonCloudComponent";
-import SunComponent from "../SunComponent";
+import type { WeatherTypes } from "@/types/weather";
+import MoonCloudComponent from "../../../components/cosmic/MoonCloudComponent";
+import SunComponent from "../../../components/cosmic/SunComponent";
 interface WeatherStatusProps {
-  weatherData: CurrentWeatherTypes;
+  weatherData: WeatherTypes;
 }
 export default function WeatherStatus({ weatherData }: WeatherStatusProps) {
   const now = weatherData.dt;
@@ -15,7 +15,9 @@ export default function WeatherStatus({ weatherData }: WeatherStatusProps) {
         {weatherData.name},{" "}
         <span className="font-extralight">{weatherData.sys.country}</span>
       </h1>
-      <h3 className="text-lg text-blue-500">{weatherData.weather.at(0)?.main}</h3>
+      <h3 className="text-lg text-blue-500">
+        {weatherData.weather.at(0)?.main}
+      </h3>
       <div className="flex flex-row items-center justify-start gap-8">
         {isDay ? <SunComponent /> : <MoonCloudComponent />}
         <h2 className="text-5xl">

@@ -1,8 +1,8 @@
-import type { CurrentWeatherTypes } from "@/types/weather";
+import type { WeatherTypes } from "@/types/weather";
 import { Droplets, Gauge, Thermometer, Wind } from "lucide-react";
 import WeatherCard from "./WeatherCard";
 interface WeatherDataProps {
-  weatherData: CurrentWeatherTypes;
+  weatherData: WeatherTypes;
 }
 
 export default function WeatherData({ weatherData }: WeatherDataProps) {

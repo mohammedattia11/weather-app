@@ -1,12 +1,12 @@
-import CitiesList from "@/components/CitiesList";
-import SearchField from "@/components/SearchField";
-import ForecastList from "@/components/forecast/ForecastList";
-import { Particles } from "@/components/magicui/particles";
-import WeatherListIndex from "@/components/weather/CurrentWeatherIndex";
+import CitiesList from "@/components/ui/CitiesList";
+import SearchField from "@/components/ui/SearchField";
+import { Particles } from "@/components/ui/particles";
+import Forecast from "@/feature/forecast/Forecast";
+import Weather from "@/feature/weather/Weather";
 import { useLocation } from "@/hooks/useLocation";
 import useSearch from "@/hooks/useSearch";
 import { cn } from "@/lib/utils";
-import { type CurrentWeatherTypes } from "@/types/weather";
+import { type WeatherTypes } from "@/types/weather";
 import { useEffect, useState } from "react";
 
 export default function MainLayout() {
@@ -23,8 +23,8 @@ export default function MainLayout() {
   }, [coordinates]);
 
   const { isPending: isWeatherLoading, data: weatherData } =
-    useSearch<CurrentWeatherTypes>(searchQuery, "weather", coords);
-  const { data: forecastData } = useSearch<CurrentWeatherTypes[]>(
+    useSearch<WeatherTypes>(searchQuery, "weather", coords);
+  const { data: forecastData } = useSearch<WeatherTypes[]>(
     searchQuery,
     "forecast",
     coords,
@@ -70,8 +70,8 @@ export default function MainLayout() {
               </p>
               <p className="text-sm">just now</p>
             </div>
-            {weatherData && <WeatherListIndex weatherData={weatherData} />}
-            {forecastData && <ForecastList forecastData={forecastData} />}
+            {weatherData && <Weather weatherData={weatherData} />}
+            {forecastData && <Forecast forecastData={forecastData} />}
           </>
         )}
       </main>

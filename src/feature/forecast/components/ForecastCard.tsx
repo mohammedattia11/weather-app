@@ -1,10 +1,10 @@
-import type { CurrentWeatherTypes } from "@/types/weather";
+import MoonCloudComponent from "@/components/cosmic/MoonCloudComponent";
+import SunComponent from "@/components/cosmic/SunComponent";
+import type { WeatherTypes } from "@/types/weather";
 import { Droplets, Wind } from "lucide-react";
-import MoonCloudComponent from "../MoonCloudComponent";
-import SunComponent from "../SunComponent";
 import ForecastData from "./ForecastData";
 interface ForecastProps {
-  forecastData: CurrentWeatherTypes;
+  forecastData: WeatherTypes;
 }
 export default function ForecastCard({ forecastData }: ForecastProps) {
   const now = forecastData.dt;

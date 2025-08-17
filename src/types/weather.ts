@@ -1,4 +1,4 @@
-export interface CurrentWeatherTypes {
+export interface WeatherTypes {
   coord: Coord;
   weather: Weather[];
   base: string;
