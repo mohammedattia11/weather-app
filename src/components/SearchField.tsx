@@ -6,35 +6,35 @@ import { Spinner } from "./ui/Spinner";
 
 interface SearchFieldProps {
   onSubmit: (query: string) => void;
-  isLoading:boolean;
+  isLoading: boolean;
 }
 
-export default function SearchField({ onSubmit,isLoading }: SearchFieldProps) {
+export default function SearchField({ onSubmit, isLoading }: SearchFieldProps) {
   const [query, setQuery] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSubmit(query)
+    onSubmit(query);
   };
 
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-row items-center  justify-center py-8 px-6 rounded-xl bg-main-color/80 gap-5 w-full lg:w-6/12 lg:mx-auto"
+      className="hover: bg-main-color/80 flex w-full flex-row items-center justify-center gap-5 rounded-xl border px-6 py-8 duration-600 hover:border-blue-500/50 lg:mx-auto lg:w-6/12"
     >
       <div className="w-8/12">
         <SearchInput value={query} onChange={setQuery} />
       </div>
-      <div className="flex flex-row justify-center gap-2 items-center w-4/12">
+      <div className="flex w-4/12 flex-row items-center justify-center gap-2">
         <Button
-        disabled={isLoading}
+          disabled={isLoading}
           type="submit"
-          className="p-5 rounded-xl bg-main-color hover:bg-main-color border hover:border-blue-500/50 duration-300 text-stone-400 capitalize cursor-pointer"
+          className="bg-main-color hover:bg-main-color cursor-pointer rounded-xl border p-5 text-stone-400 capitalize duration-300 hover:border-blue-500/50"
         >
-          {isLoading ? <Spinner/> :"Search"}
+          {isLoading ? <Spinner /> : "Search"}
         </Button>
-        <Button className="cursor-pointer bg-gradient-to-r from-[#151D2C]/90 to-[#102824]/90 backdrop-blur-sm py-5 px-4  border border-secondary-color">
-          <MapPin className="text-stone-300 " />
+        <Button className="border-secondary-color cursor-pointer border bg-gradient-to-r from-[#151D2C]/90 to-[#102824]/90 px-4 py-5 backdrop-blur-sm">
+          <MapPin className="text-stone-300" />
         </Button>
       </div>
     </form>

@@ -1,24 +1,22 @@
+import type { ForecastWeatherTypes } from "@/types/forecast";
 import { Calendar } from "lucide-react";
 import ForecastCard from "./ForecastCard";
-import SunComponent from "../SunComponent";
-import RainComponent from "../RainComponent";
-import CloudComponent from "../CloudComponent";
-
-export default function ForecastList() {
+interface ForecastProps {
+  forecastData: ForecastWeatherTypes;
+}
+export default function ForecastList({ forecastData }: ForecastProps) {
   return (
-    <div className="flex p-4 flex-col rounded-3xl gap-10 bg-gradient-to-r from-[#151D2C]/90 to-[#102824]/90 backdrop-blur-sm w-full border border-secondary-color ">
-      <div className="flex flex-row gap-3 pl-4 pt-5 items-center">
+    <div className="border-secondary-color flex w-full flex-col gap-10 rounded-3xl border bg-gradient-to-r from-[#151D2C]/90 to-[#102824]/90 p-4 backdrop-blur-sm">
+      <div className="flex flex-row items-center gap-3 pt-5 pl-4">
         <span className="bg-secondary-color rounded-lg p-2">
           <Calendar className="text-humidity-color" />
         </span>
-        <p className="text-3xl font-semibold">5-Day Cosmic Forecast</p>
+        <p className="text-3xl font-semibold">Today Cosmic Forecast</p>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 p-4 w-full">
-        <ForecastCard icon={<SunComponent size={90}/>}/>
-        <ForecastCard icon={<RainComponent size={90}/>}/>
-        <ForecastCard icon={<CloudComponent size={90}/>}/>
-        <ForecastCard icon={<RainComponent size={90}/>}/>
-        <ForecastCard icon={<SunComponent size={90}/>}/>
+      <div className="grid w-full grid-cols-1 gap-6 p-4 sm:grid-cols-2 lg:grid-cols-5">
+        {forecastData?.list.slice(0, 5).map((item) => (
+          <ForecastCard forecastData={item} key={item.dt} />
+        ))}
       </div>
     </div>
   );

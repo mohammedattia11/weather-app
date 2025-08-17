@@ -6,23 +6,25 @@ import WeatherListIndex from "@/components/weather/CurrentWeatherIndex";
 import useSearch from "@/hooks/useSearch";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
+import { type CurrentWeatherTypes } from "@/types/weather";
+import { type ForecastWeatherTypes } from "@/types/forecast";
 
 export default function MainLayout() {
   const [searchQuery, setSearchQuery] = useState("");
-  const {isPending, data} = useSearch(searchQuery)
+  const { isPending:isWeatherLoading, data:weatherData } = useSearch<CurrentWeatherTypes>(searchQuery,"weather");
+  const { data:forecastData } = useSearch<ForecastWeatherTypes>(searchQuery,"forecast");
+  
 
-  const isLoading = isPending && searchQuery.length > 0
+  const isLoading = isWeatherLoading && searchQuery.length > 0;
 
   const handleSearchSubmit = (query: string) => {
     setSearchQuery(query);
   };
-  console.log(isPending)
-
   return (
     <div
       className={cn(
-        "relative flex w-full flex-col items-center justify-center overflow-x-hidden rounded-lg bg-background",
-        !searchQuery ? "h-screen" : ""
+        "bg-background relative flex w-full flex-col items-center justify-center overflow-x-hidden rounded-lg",
+        !searchQuery ? "h-screen" : "",
       )}
     >
       <Particles
@@ -31,19 +33,19 @@ export default function MainLayout() {
         ease={80}
         refresh
       />
-      <main className=" container mx-auto p-4 z-10 flex flex-col gap-4">
+      <main className="z-10 container mx-auto flex flex-col gap-4 p-4">
         <SearchField isLoading={isLoading} onSubmit={handleSearchSubmit} />
         <CitiesList setSearchQuery={setSearchQuery} />
         {searchQuery && (
           <>
-            <div className="flex flex-row gap-3 items-center text-stone-300 lg:w-9/12 lg:mx-auto">
-              <p className="capitalize text-2xl font-semibold">
+            <div className="flex flex-row items-center gap-3 text-stone-300 lg:mx-auto lg:w-9/12">
+              <p className="text-2xl font-semibold capitalize">
                 current weather
               </p>
               <p className="text-sm">just now</p>
             </div>
-            {data && <WeatherListIndex weatherData={data} />}
-            <ForecastList />
+            {weatherData && <WeatherListIndex weatherData={weatherData} />}
+             {forecastData &&<ForecastList forecastData={forecastData} />}
           </>
         )}
       </main>
