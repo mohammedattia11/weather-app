@@ -44,7 +44,14 @@ export interface Sys {
 
 export interface Weather {
   id: number;
-  main: string;
+  main:
+    | "Thunderstorm"
+    | "Drizzle"
+    | "Rain"
+    | "Snow"
+    | "Atmosphere"
+    | "Clear"
+    | "Clouds";
   description: string;
   icon: string;
 }
