@@ -6,7 +6,7 @@ import SearchInput from "./SearchInput";
 import { Spinner } from "./Spinner";
 
 export default function SearchField() {
-  const { handleSearchSubmit, handleGeoSearch, isLoading } = useWeather();
+  const { handleSearchSubmit, handleGeoSearch, isLoading, t } = useWeather();
   const [query, setQuery] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -26,9 +26,9 @@ export default function SearchField() {
         <Button
           disabled={isLoading}
           type="submit"
-          className="bg-main-color hover:bg-main-color cursor-pointer rounded-xl border p-5 text-stone-400 capitalize duration-300 hover:border-blue-500/50"
+          className=" bg-main-color hover:bg-main-color cursor-pointer rounded-xl border p-5 text-stone-400 capitalize duration-300 hover:border-blue-500/50"
         >
-          {isLoading ? <Spinner /> : "Search"}
+          {isLoading ? <Spinner /> : t("search")}
         </Button>
         <Button
           onClick={handleGeoSearch}

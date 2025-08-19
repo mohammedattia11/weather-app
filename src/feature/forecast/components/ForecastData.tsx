@@ -1,8 +1,10 @@
+import { useWeather } from "@/hooks/useWeather";
 import { cn } from "@/lib/utils";
+import { arabicNumberFormater } from "@/utils/arabicNumbersFormater";
 
 interface ForecastDataProps {
   icon: React.ReactNode;
-  description: "Humidity" | "Wind Speed" | "Precipitation";
+  description: "humidity" | "wind speed" | "precipitation";
   value: number;
 }
 export default function ForecastData({
@@ -10,23 +12,26 @@ export default function ForecastData({
   description,
   value,
 }: ForecastDataProps) {
+  const {t,lng} = useWeather()
   return (
-    <div className="mb-4 flex justify-between">
+    <div dir={lng === "ar"? "rtl":"ltr"} className="mb-4 flex justify-between">
       <p className="flex gap-2 text-sm">
         <span
           className={cn(
-            description === "Humidity" || description === "Precipitation"
+            description === "humidity" || description === "precipitation"
               ? "text-humidity-color"
               : "text-wind-color",
           )}
         >
           {icon}
         </span>
-        {description}
+        {t(description)}
       </p>
-      <p className="">
-        {value}
-        {description === "Wind Speed" ? " Km/h" : "%"}
+      <p dir={lng === "ar"? "rtl":"ltr"}  className=" capitalize">
+        {arabicNumberFormater(value)}
+        <span>
+        {description === "wind speed" ? t(" Km/h") : "%"}
+        </span>
       </p>
     </div>
   );

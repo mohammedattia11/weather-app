@@ -49,9 +49,8 @@ export interface Weather {
     | "Drizzle"
     | "Rain"
     | "Snow"
-    | "Atmosphere"
     | "Clear"
-    | "Clouds";
+    | "Clouds"
   description: string;
   icon: string;
 }
