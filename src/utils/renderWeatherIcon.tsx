@@ -13,13 +13,25 @@ type WeatherMain =
   | "Clear"
   | "Clouds";
 export function renderWeatherIcon(value:WeatherMain, isDay:boolean=true):JSX.Element | undefined {
-  if(value === "Clear" && isDay) return <SunComponent/>
-  if(value === "Clear" && !isDay) return <MoonCloudComponent/>
-  if(value === "Clouds" && isDay) return <CloudComponent/>
-  if(value === "Clouds" && !isDay) return <MoonCloudComponent/>
-  if(value === "Rain") return <RainComponent/>
-  if(value === "Thunderstorm") return <RainComponent/>
-  if(value === "Drizzle") return <RainComponent/>
-  if(value === "Snow" && isDay) return <SnowComponent/>
-  if(value === "Snow" && !isDay) return <SnowComponent isNight={true}/>
+  switch(value) {
+    case "Clear" :
+      if(isDay) return <SunComponent/>;
+      else return <MoonCloudComponent/>;
+    case "Clouds":
+      if(isDay) return <CloudComponent/>;
+      else return <MoonCloudComponent/>
+    case "Rain":
+      return <RainComponent/>;
+    case "Thunderstorm" :
+      return <RainComponent/>
+    case "Drizzle":
+      return <RainComponent/>;
+    case "Snow":
+      if(isDay) return <SnowComponent/>;
+      else return <SnowComponent isNight={true}/>
+    default:
+      if(isDay) return <CloudComponent/>
+      else return <MoonCloudComponent/>
+  }
+
 }

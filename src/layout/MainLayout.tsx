@@ -8,7 +8,7 @@ import { useWeather } from "@/hooks/useWeather";
 import { cn } from "@/lib/utils";
 
 export default function MainLayout() {
-  const { shouldShowWeather, weatherData,forecastData } = useWeather();
+  const { shouldShowWeather, weatherData,forecastData,t } = useWeather();
   return (
     <div
       className={cn(
@@ -30,9 +30,9 @@ export default function MainLayout() {
           <>
             <div className="flex flex-row items-center gap-3 text-stone-300 lg:mx-auto lg:w-9/12">
               <p className="text-2xl font-semibold capitalize">
-                current weather
+                {t("current weather")}
               </p>
-              <p className="text-sm">just now</p>
+              <p className="text-sm">{t("just now")}</p>
             </div>
             {weatherData && <Weather />}
             {forecastData && <Forecast />}

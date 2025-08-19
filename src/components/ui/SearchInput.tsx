@@ -1,4 +1,5 @@
 import { Input } from "@/components/ui/input";
+import { useWeather } from "@/hooks/useWeather";
 import { Search } from "lucide-react";
 import { useId } from "react";
 
@@ -9,13 +10,14 @@ interface SearchInputProps {
 
 export default function SearchInput({ value, onChange }: SearchInputProps) {
   const id = useId();
+  const {t} = useWeather()
   return (
     <div className="*:not-first:mt-2">
       <div className="relative">
         <Input
           id={id}
           className="peer ps-9 placeholder:text-lg"
-          placeholder="Search for a city..."
+          placeholder={t("Search for a city...")}
           type="search"
           value={value}
           onChange={(e) => onChange(e.target.value)}

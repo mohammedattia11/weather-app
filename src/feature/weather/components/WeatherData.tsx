@@ -3,33 +3,33 @@ import { Droplets, Gauge, Thermometer, Wind } from "lucide-react";
 import WeatherCard from "./WeatherCard";
 
 export default function WeatherData() {
-  const { weatherData } = useWeather();
+  const { weatherData,t } = useWeather();
   return (
     <div className="flex flex-col justify-center lg:w-9/12">
-      <h2 className="p-4 text-xl font-semibold">Current Weather</h2>
+      <h2 className="p-4 text-xl font-semibold capitalize">{t("current weather")}</h2>
       <div className="grid w-full grid-cols-1 gap-6 p-4 sm:grid-cols-2">
         <WeatherCard
-          title="degree"
+          title={t("temperature")}
           icon={<Thermometer />}
           value={Math.floor(weatherData?.main.feels_like ?? 0)}
         />
         <WeatherCard
-          title="humidity"
+          title={t("humidity")}
           icon={<Droplets />}
           value={weatherData?.main.humidity ?? 0}
         />
         <WeatherCard
-          title="wind Speed"
+          title={t("wind Speed")}
           icon={<Wind />}
           value={weatherData?.wind.speed ?? 0}
         />
         <WeatherCard
-          title="pressure"
+          title={t("pressure")}
           icon={<Gauge />}
           value={weatherData?.main.pressure ?? 0}
         />
         <WeatherCard
-          title="visibility"
+          title={t("visibility")}
           icon={<Thermometer />}
           value={
             typeof weatherData?.visibility === "number"
