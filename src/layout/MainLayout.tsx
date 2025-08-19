@@ -1,6 +1,7 @@
 import CitiesList from "@/components/ui/CitiesList";
 import Header from "@/components/ui/Header";
 import SearchField from "@/components/ui/SearchField";
+import { Spinner } from "@/components/ui/Spinner";
 import { Particles } from "@/components/ui/particles";
 import Forecast from "@/feature/forecast/Forecast";
 import Weather from "@/feature/weather/Weather";
@@ -8,7 +9,7 @@ import { useWeather } from "@/hooks/useWeather";
 import { cn } from "@/lib/utils";
 
 export default function MainLayout() {
-  const { shouldShowWeather, weatherData,forecastData,t } = useWeather();
+  const { shouldShowWeather, weatherData, forecastData, isLoading } = useWeather();
   return (
     <div
       className={cn(
@@ -22,18 +23,12 @@ export default function MainLayout() {
         ease={80}
         refresh
       />
-      <main className="z-10 container mx-auto flex flex-col gap-4 p-4">
+      <main className="z-10 container items-center flex flex-col gap-4 p-4">
         <Header />
-        <SearchField/>
-        <CitiesList/>
-        {shouldShowWeather && (
+        <SearchField />
+        <CitiesList />
+        {isLoading ? <Spinner variant="circle-filled" size={80}/> : (
           <>
-            <div className="flex flex-row items-center gap-3 text-stone-300 lg:mx-auto lg:w-9/12">
-              <p className="text-2xl font-semibold capitalize">
-                {t("current weather")}
-              </p>
-              <p className="text-sm">{t("just now")}</p>
-            </div>
             {weatherData && <Weather />}
             {forecastData && <Forecast />}
           </>

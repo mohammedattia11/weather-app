@@ -3,7 +3,6 @@ import { MapPin } from "lucide-react";
 import { useState } from "react";
 import { Button } from "./button";
 import SearchInput from "./SearchInput";
-import { Spinner } from "./Spinner";
 
 export default function SearchField() {
   const { handleSearchSubmit, handleGeoSearch, isLoading, t } = useWeather();
@@ -26,9 +25,9 @@ export default function SearchField() {
         <Button
           disabled={isLoading}
           type="submit"
-          className=" bg-main-color hover:bg-main-color cursor-pointer rounded-xl border p-5 text-stone-400 capitalize duration-300 hover:border-blue-500/50"
+          className="bg-main-color hover:bg-main-color cursor-pointer rounded-xl border p-5 text-stone-400 capitalize duration-300 hover:border-blue-500/50"
         >
-          {isLoading ? <Spinner /> : t("search")}
+          {t("search")}
         </Button>
         <Button
           onClick={handleGeoSearch}
