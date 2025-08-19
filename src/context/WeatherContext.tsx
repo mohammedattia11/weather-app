@@ -30,9 +30,13 @@ export const WeatherContext = createContext<WeatherContextType | undefined>(
 export const WeatherProvider = ({ children }: { children: ReactNode }) => {
   const [searchQuery, setSearchQuery] = useState<string | null>(null);
   const [coords, setCoords] = useState<Coords>(undefined);
-  const [lng, setLng] = useState("en");
-  const { getCurrentLocation, coordinates } = useLocation();
   const { t, i18n } = useTranslation();
+  const [lng, setLng] = useState(i18n.language);
+  const {
+    getCurrentLocation,
+    coordinates,
+    isLoading:coordsLoading
+  } = useLocation();
 
   useEffect(() => {
     if (coordinates) {
@@ -50,7 +54,7 @@ export const WeatherProvider = ({ children }: { children: ReactNode }) => {
   );
 
   const shouldShowWeather = !!(searchQuery || coords);
-  const isLoading = isWeatherLoading && shouldShowWeather;
+  const isLoading = (isWeatherLoading && shouldShowWeather) || coordsLoading;
 
   const handleSearchSubmit = (query: string) => {
     setSearchQuery(query);
