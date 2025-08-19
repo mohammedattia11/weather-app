@@ -12,6 +12,7 @@ interface WeatherContextType {
   coords: Coords;
   weatherData: WeatherTypes | undefined;
   forecastData: WeatherTypes[] | undefined;
+  weatherError:Error | null
   isLoading: boolean;
   shouldShowWeather: boolean;
   lng: string;
@@ -44,7 +45,7 @@ export const WeatherProvider = ({ children }: { children: ReactNode }) => {
     }
   }, [coordinates]);
 
-  const { isPending: isWeatherLoading, data: weatherData } =
+  const { isPending: isWeatherLoading, data: weatherData, error:weatherError } =
     useSearch<WeatherTypes>(searchQuery, "weather", coords);
 
   const { data: forecastData } = useSearch<WeatherTypes[]>(
@@ -76,6 +77,7 @@ export const WeatherProvider = ({ children }: { children: ReactNode }) => {
         isLoading,
         shouldShowWeather,
         lng,
+        weatherError,
         setLng,
         setCoords,
         setSearchQuery,

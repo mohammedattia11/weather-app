@@ -16,7 +16,7 @@ export default function SearchField() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="hover: bg-main-color/80 flex w-full flex-row items-center justify-center gap-5 rounded-xl border px-6 py-8 duration-600 hover:border-blue-500/50 lg:mx-auto lg:w-6/12"
+      className="bg-main-color/80 flex w-full flex-row items-center justify-center gap-5 rounded-xl border px-6 py-8 duration-600 hover:border-blue-500/50 lg:mx-auto lg:w-6/12"
     >
       <div className="w-8/12">
         <SearchInput value={query} onChange={setQuery} />

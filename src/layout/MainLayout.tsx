@@ -1,4 +1,5 @@
 import CitiesList from "@/components/ui/CitiesList";
+import Error from "@/components/ui/Error";
 import Header from "@/components/ui/Header";
 import SearchField from "@/components/ui/SearchField";
 import { Spinner } from "@/components/ui/Spinner";
@@ -9,12 +10,13 @@ import { useWeather } from "@/hooks/useWeather";
 import { cn } from "@/lib/utils";
 
 export default function MainLayout() {
-  const { shouldShowWeather, weatherData, forecastData, isLoading } = useWeather();
+  const {  weatherData, forecastData, isLoading, weatherError } = useWeather();
+  if(weatherError) console.log(weatherError.message)
   return (
     <div
       className={cn(
-        "bg-background relative flex w-full flex-col items-center justify-center overflow-x-hidden rounded-lg",
-        !shouldShowWeather ? "h-screen justify-start" : "",
+        "bg-background h-screen justify-start relative flex w-full flex-col items-center overflow-x-hidden rounded-lg",
+        
       )}
     >
       <Particles
@@ -27,7 +29,7 @@ export default function MainLayout() {
         <Header />
         <SearchField />
         <CitiesList />
-        {isLoading ? <Spinner variant="circle-filled" size={80}/> : (
+        {isLoading ? <Spinner variant="circle-filled" size={80}/> : weatherError? <Error>{weatherError.message}</Error> : (
           <>
             {weatherData && <Weather />}
             {forecastData && <Forecast />}
