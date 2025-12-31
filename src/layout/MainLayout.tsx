@@ -10,12 +10,11 @@ import { useWeather } from "@/hooks/useWeather";
 import { cn } from "@/lib/utils";
 
 export default function MainLayout() {
-  const {  weatherData, forecastData, isLoading, weatherError } = useWeather();
+  const { weatherData, forecastData, isLoading, weatherError } = useWeather();
   return (
     <div
       className={cn(
-        "bg-background h-screen justify-start relative flex w-full flex-col items-center overflow-x-hidden rounded-lg",
-        
+        "bg-background relative flex h-screen w-full flex-col items-center justify-start overflow-x-hidden rounded-lg",
       )}
     >
       <Particles
@@ -24,11 +23,15 @@ export default function MainLayout() {
         ease={80}
         refresh
       />
-      <main className="z-10 container items-center flex flex-col gap-4 p-4">
+      <main className="z-10 container flex flex-col items-center gap-4 p-4">
         <Header />
         <SearchField />
         <CitiesList />
-        {isLoading ? <Spinner variant="circle-filled" size={80}/> : weatherError? <Error>{weatherError.message}</Error> : (
+        {isLoading ? (
+          <Spinner variant="circle-filled" size={80} />
+        ) : weatherError ? (
+          <Error>{weatherError.message}</Error>
+        ) : (
           <>
             {weatherData && <Weather />}
             {forecastData && <Forecast />}

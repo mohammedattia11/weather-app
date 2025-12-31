@@ -1,9 +1,12 @@
 import { useWeather } from "@/hooks/useWeather";
 import { Button } from "./button";
 export default function CitiesList() {
-  const {setSearchQuery,setCoords,t} = useWeather();
+  const { setSearchQuery, setCoords, t, lng } = useWeather();
   return (
-    <div className="flex w-full flex-col gap-1 lg:mx-auto lg:w-6/12">
+    <div
+      dir={lng === "en" ? "ltr" : "rtl"}
+      className="flex w-full flex-col gap-1 lg:mx-auto lg:w-6/12"
+    >
       <p className="text-stone-300 capitalize">{t("popular cities")}</p>
       <div className="grid w-full grid-cols-3 gap-6 p-4 sm:grid-cols-6">
         <Button

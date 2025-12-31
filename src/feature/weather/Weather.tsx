@@ -4,10 +4,13 @@ import WeatherData from "./components/WeatherData";
 import WeatherStatus from "./components/WeatherStatus";
 
 export default function Weather() {
-  const { lng,t } = useWeather();
+  const { lng, t } = useWeather();
   return (
     <>
-      <div dir={lng==="ar"?"rtl":"ltr"} className="flex flex-row items-center gap-3 text-stone-300 lg:w-9/12">
+      <div
+        dir={lng === "ar" ? "rtl" : "ltr"}
+        className="flex flex-row items-center gap-3 text-stone-300 lg:w-9/12"
+      >
         <p className="text-2xl font-semibold capitalize">
           {t("current weather")}
         </p>

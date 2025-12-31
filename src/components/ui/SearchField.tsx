@@ -5,7 +5,8 @@ import { Button } from "./button";
 import SearchInput from "./SearchInput";
 
 export default function SearchField() {
-  const { handleSearchSubmit, handleGeoSearch, isLoading, t } = useWeather();
+  const { handleSearchSubmit, handleGeoSearch, isLoading, t, lng } =
+    useWeather();
   const [query, setQuery] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -17,6 +18,7 @@ export default function SearchField() {
     <form
       onSubmit={handleSubmit}
       className="bg-main-color/80 flex w-full flex-row items-center justify-center gap-5 rounded-xl border px-6 py-8 duration-600 hover:border-blue-500/50 lg:mx-auto lg:w-6/12"
+      dir={lng === "en" ? "ltr" : "rtl"}
     >
       <div className="w-8/12">
         <SearchInput value={query} onChange={setQuery} />
