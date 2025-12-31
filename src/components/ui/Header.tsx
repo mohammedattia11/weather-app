@@ -4,8 +4,8 @@ import MoonCloudComponent from "../cosmic/MoonCloudComponent";
 import { Button } from "./button";
 export default function Header() {
   const { lng, setLng, i18n } = useWeather();
+  const currentLng = lng === "en" ? "ar" : "en";
   function changeLangHandler() {
-    const currentLng = lng === "en" ? "ar" : "en";
     setLng(currentLng);
     i18n.changeLanguage(currentLng);
   }
@@ -32,7 +32,7 @@ export default function Header() {
           <span>
             <Globe className="text-stone-300" />
           </span>{" "}
-          {lng}
+          {currentLng}
         </Button>
       </div>
     </div>

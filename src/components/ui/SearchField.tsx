@@ -17,13 +17,13 @@ export default function SearchField() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-main-color/80 flex w-full flex-row items-center justify-center gap-5 rounded-xl border px-6 py-8 duration-600 hover:border-blue-500/50 lg:mx-auto lg:w-6/12"
+      className="bg-main-color/80 grid grid-cols-3 items-center rounded-xl border px-6 py-8 duration-600 hover:border-blue-500/50 lg:mx-auto lg:w-6/12"
       dir={lng === "en" ? "ltr" : "rtl"}
     >
-      <div className="w-8/12">
+      <div className="col-span-2">
         <SearchInput value={query} onChange={setQuery} />
       </div>
-      <div className="flex w-4/12 flex-row items-center justify-center gap-2">
+      <div className="flex flex-row items-center justify-end gap-2 w-50">
         <Button
           disabled={isLoading}
           type="submit"
@@ -33,7 +33,7 @@ export default function SearchField() {
         </Button>
         <Button
           onClick={handleGeoSearch}
-          className="border-secondary-color cursor-pointer border bg-gradient-to-r from-[#151D2C]/90 to-[#102824]/90 px-4 py-5 backdrop-blur-sm"
+          className="border-secondary-color cursor-pointer border bg-gradient-to-r from-[#151D2C]/90 to-[#102824]/90 px-5 py-4 backdrop-blur-sm"
         >
           <MapPin className="text-stone-300" />
         </Button>
