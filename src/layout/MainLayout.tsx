@@ -11,7 +11,6 @@ import { cn } from "@/lib/utils";
 
 export default function MainLayout() {
   const {  weatherData, forecastData, isLoading, weatherError } = useWeather();
-  if(weatherError) console.log(weatherError.message)
   return (
     <div
       className={cn(

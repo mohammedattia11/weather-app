@@ -2,16 +2,13 @@ import { useWeather } from "@/hooks/useWeather";
 import { Globe, Thermometer } from "lucide-react";
 import MoonCloudComponent from "../cosmic/MoonCloudComponent";
 import { Button } from "./button";
-import { useEffect } from "react";
-
 export default function Header() {
   const { lng, setLng,i18n } = useWeather();
   function changeLangHandler() {
-    setLng(lng === "en" ? "ar" : "en")
+    const currentLng = lng === "en" ? "ar" : "en"
+    setLng(currentLng)
+    i18n.changeLanguage(currentLng)
   }
-  useEffect(()=> {
-    i18n.changeLanguage(lng)
-  },[i18n,lng])
   return (
     <div className="hover: bg-main-color/80 flex w-full flex-row items-center justify-between gap-5 rounded-xl border px-6 py-8 duration-600 hover:border-blue-500/50 lg:mx-auto lg:w-10/12">
       <div className="flex flex-row gap-2">

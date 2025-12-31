@@ -59,6 +59,13 @@ export const WeatherProvider = ({ children }: { children: ReactNode }) => {
     weatherReducer,
     initialState,
   );
+
+  // Set i18n language to English on mount
+  useEffect(() => {
+    i18n.changeLanguage("en");
+    dispatch({ type: "SET_LNG", payload: "en" });
+  }, []);
+
   const {
     getCurrentLocation,
     coordinates,

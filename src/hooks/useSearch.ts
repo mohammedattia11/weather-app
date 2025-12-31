@@ -7,7 +7,7 @@ async function getWeatherData<T>(
   query: string | null,
   type: "weather" | "forecast",
   coords?: { lat: number; lon: number },
-): Promise<T> {
+): Promise<T> { 
   try {
     const endpoint =
       type === "weather"
